@@ -18,9 +18,9 @@ class Calculator {
   addNumber(number) {
     if (this.bottomValue.length < 19) {
       if (number === "." && !this.bottomValue.includes(".")) {
-        this.bottomValue = this.bottomValue + number;
+        this.bottomValue += number;
       } else if (number !== ".") {
-        this.bottomValue = this.bottomValue + number;
+        this.bottomValue += number;
       }
     }
   }
@@ -47,8 +47,8 @@ class Calculator {
 
   makeCalculation() {
     let result;
-    co convertedTopValue = parseFloat(this.topValue);
-    let convertedBottomValue = parseFloat(this.bottomValue);
+    const convertedTopValue = parseFloat(this.topValue);
+    const convertedBottomValue = parseFloat(this.bottomValue);
 
     switch (this.operator) {
       case "+":

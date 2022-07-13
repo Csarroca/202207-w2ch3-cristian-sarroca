@@ -1,6 +1,8 @@
-//variables en global scope
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 
-let numbersCard = [];
+const numbersCard = [];
 let numbersCard2 = [[], [], []];
 let randomNumber;
 let bomboPassedNumbers = [];
@@ -25,18 +27,16 @@ const SaveUserName = () => {
   userName = "";
   do {
     userName = prompt("Welcome to SKYLAB bingo, please introduce your name. ");
-    if (userName !== null && userName !== "" && isNaN(userName)) {
+    if (userName !== null && userName !== "" && Number.isNaN(userName)) {
       alert(`¡Welcome ${userName}! Thanks for choose our game.`);
     } else {
       alert(" Use a valid name. You can't use only numbers.  ");
     }
-  } while (userName === null || userName === "" || !isNaN(userName));
+  } while (userName === null || userName === "" || !Number.isNaN(userName));
   console.log(gameRules);
 };
 
-const showRandomNumber = () => {
-  return Math.ceil(Math.random() * 25) + 1;
-};
+const showRandomNumber = () => Math.ceil(Math.random() * 25) + 1;
 
 const randomNumbersCard = () => {
   numbersCard2 = [[], [], []];
@@ -69,20 +69,6 @@ const askForNewNumbersCard = () => {
     }
   } while (question !== false);
 };
-
-const askForContinue = () => {
-  if (bingoAlert === false) {
-    let questionForContinue = confirm("Do you want to continue playing?");
-    if (questionForContinue === true) {
-      numberBombo();
-    } else {
-      alert(`Thanks for play SKYLAB bingo!!!`);
-    }
-  } else {
-    console.log("Thanks for play SKYLAB bingo!!!");
-  }
-};
-
 const checkLine = () => {
   if (lineAlert === false) {
     if (numbersCard2[0].every((number) => number === "X")) {
@@ -110,7 +96,6 @@ const checkBingo = () => {
     return (bingoAlert = true);
   }
 };
-
 const checkNumber = (condition, number) => {
   if (condition === true) {
     alert("There's a coincidence!!!.");
@@ -120,6 +105,19 @@ const checkNumber = (condition, number) => {
     alert(` number generated : ${number}`);
   }
   askForContinue();
+};
+
+const askForContinue = () => {
+  if (bingoAlert === false) {
+    const questionForContinue = confirm("Do you want to continue playing?");
+    if (questionForContinue === true) {
+      numberBombo();
+    } else {
+      alert(`Thanks for play SKYLAB bingo!!!`);
+    }
+  } else {
+    console.log("Thanks for play SKYLAB bingo!!!");
+  }
 };
 
 const numberBombo = () => {
@@ -155,9 +153,7 @@ const showPlayersRanking = () => {
   ];
   console.log("This is the hall of fame in Skylab bingo! ");
 
-  ranking.sort(function (a, b) {
-    return b.punctuation - a.punctuation;
-  });
+  ranking.sort((a, b) => b.punctuation - a.punctuation);
   console.table(ranking);
 };
 
@@ -166,7 +162,7 @@ const playAgain = () => {
   lineAlert = false;
   bomboPassedNumbers = [];
   counter = 0;
-  let newGame = confirm(`Do you want to play again?`);
+  const newGame = confirm(`Do you want to play again?`);
 
   if (newGame === false || newGame === null || newGame === undefined) {
     alert("Thanks for playing Skylab bingo, come back soon. ");
