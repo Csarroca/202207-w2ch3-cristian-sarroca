@@ -47,7 +47,7 @@ class Calculator {
 
   makeCalculation() {
     let result;
-    let convertedTopValue = parseFloat(this.topValue);
+    co convertedTopValue = parseFloat(this.topValue);
     let convertedBottomValue = parseFloat(this.bottomValue);
 
     switch (this.operator) {
