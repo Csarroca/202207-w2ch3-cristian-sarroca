@@ -2,7 +2,8 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
-let vuelos = [
+let vuelos;
+vuelos = [
   { id: 0, to: "Bilbao", from: "Barcelona", cost: 1600, scale: false },
 
   { id: 1, to: "New York", from: "Barcelona", cost: 700, scale: false },
@@ -27,6 +28,8 @@ let vuelos = [
 ];
 let nombreUsuario;
 let idSeleccionada;
+let rol;
+let preguntaUser;
 function bienvenida() {
   do {
     nombreUsuario = prompt(
@@ -94,8 +97,6 @@ function ultimosCincoVuelos() {
 }
 
 const preguntarRol = () => {
-  let rol;
-  let preguntaUser;
   do {
     preguntaUser = prompt(`Hola ${nombreUsuario}, ¿eres ADMIN o USER?`);
 
