@@ -1,27 +1,32 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 let vuelos = [
-  { id: 00, to: "Bilbao", from: "Barcelona", cost: 1600, scale: false },
+  { id: 0, to: "Bilbao", from: "Barcelona", cost: 1600, scale: false },
 
-  { id: 01, to: "New York", from: "Barcelona", cost: 700, scale: false },
+  { id: 1, to: "New York", from: "Barcelona", cost: 700, scale: false },
 
-  { id: 02, to: "Los Angeles", from: "Madrid", cost: 1100, scale: true },
+  { id: 2, to: "Los Angeles", from: "Madrid", cost: 1100, scale: true },
 
-  { id: 03, to: "Paris", from: "Barcelona", cost: 210, scale: false },
+  { id: 3, to: "Paris", from: "Barcelona", cost: 210, scale: false },
 
-  { id: 04, to: "Roma", from: "Barcelona", cost: 150, scale: false },
+  { id: 4, to: "Roma", from: "Barcelona", cost: 150, scale: false },
 
-  { id: 05, to: "London", from: "Madrid", cost: 200, scale: false },
+  { id: 5, to: "London", from: "Madrid", cost: 200, scale: false },
 
-  { id: 06, to: "Madrid", from: "Barcelona", cost: 90, scale: false },
+  { id: 6, to: "Madrid", from: "Barcelona", cost: 90, scale: false },
 
-  { id: 07, to: "Tokyo", from: "Madrid", cost: 1500, scale: true },
+  { id: 7, to: "Tokyo", from: "Madrid", cost: 1500, scale: true },
 
-  { id: 08, to: "Shangai", from: "Barcelona", cost: 800, scale: true },
+  { id: 8, to: "Shangai", from: "Barcelona", cost: 800, scale: true },
 
-  { id: 09, to: "Sydney", from: "Barcelona", cost: 150, scale: true },
+  { id: 9, to: "Sydney", from: "Barcelona", cost: 150, scale: true },
 
   { id: 10, to: "Tel-Aviv", from: "Madrid", cost: 150, scale: false },
 ];
 let nombreUsuario;
+let idSeleccionada;
 function bienvenida() {
   do {
     nombreUsuario = prompt(
@@ -30,7 +35,7 @@ function bienvenida() {
     if (
       nombreUsuario !== null &&
       nombreUsuario !== "" &&
-      isNaN(nombreUsuario)
+      Number.isNaN(nombreUsuario)
     ) {
       alert(`¡Bienvenido ${nombreUsuario} ! Gracias por confiar en nosotros.`);
     } else {
@@ -39,7 +44,7 @@ function bienvenida() {
   } while (
     nombreUsuario === null ||
     nombreUsuario === "" ||
-    !isNaN(nombreUsuario)
+    !Number.isNaN(nombreUsuario)
   );
   console.log(`Ecantando de atenderte: ${nombreUsuario}`);
 }
@@ -60,6 +65,7 @@ function infoVuelos(array) {
 function calcularCosteMedio() {
   let costeMedio = 0;
   let costeTotal = 0;
+  let i;
   for (i = 0; i < vuelos.length; i++) {
     costeTotal += vuelos[i].cost;
     costeMedio = costeTotal / vuelos.length;
@@ -70,7 +76,7 @@ function calcularCosteMedio() {
 
 function vuelosConEscala() {
   let vuelosConEscala2 = "";
-  let vuelosConEscalas = vuelos.filter((vuelo) => vuelo.scale === true);
+  const vuelosConEscalas = vuelos.filter((vuelo) => vuelo.scale === true);
   for (let i = 0; i < vuelosConEscalas.length; i++) {
     vuelosConEscala2 += `\n El vuelo con origen: ${vuelos[i].from}, y destino: ${vuelos[i].to} y con un coste  ${vuelos[i].cost} €. `;
   }
@@ -98,7 +104,8 @@ const preguntarRol = () => {
       : alert("Solo puedes introducir ADMIN o USER");
     if (rol === "admin") {
       return rol;
-    } else if (rol === "user") {
+    }
+    if (rol === "user") {
       return rol;
     }
   } while (rol !== "admin" && rol !== "user");
@@ -123,7 +130,8 @@ const opcionesAdmin = () => {
   const accionRespondida = preguntarAccion();
   if (accionRespondida === null || accionRespondida === "") {
     return alert("Cerrando consola. ");
-  } else if (accionRespondida === "crear") {
+  }
+  if (accionRespondida === "crear") {
     let nuevoVuelo = {};
     let añadirOtroVuelo;
     do {
@@ -155,44 +163,16 @@ const opcionesAdmin = () => {
   }
 };
 
-let idDeVuelosFiltrados = [];
-const opcionesUsuario = () => {
-  const precio = prompt(
-    "¿Cuál es el precio máximo que quieres pagar por tu viaje? Escribe un número."
-  );
+const idDeVuelosFiltrados = [];
 
-  if (precio < 90) {
-    alert(`Debes introducir un precio minimo valido.`);
-    return opcionesUsuario();
-  } else if (precio === null && isNaN(precio)) {
-    alert(`Gracias por visitar nuestras aerolineas.`);
-    return opcionesAdmin();
-  } else {
-    const precioNum = parseFloat(precio);
-    const vuelosFiltrados = vuelos.filter((vuelo) => vuelo.cost <= precioNum);
-
-    for (let i = 0; i < vuelosFiltrados.length; i++) {
-      idDeVuelosFiltrados.push(vuelosFiltrados[i].id);
-      vuelosFiltrados[i].scale
-        ? console.log(
-            `ID del vuelo: ${vuelosFiltrados[i].id}. El vuelo con origen ${vuelosFiltrados[i].from} y destino ${vuelosFiltrados[i].to} tiene un coste de ${vuelosFiltrados[i].cost}€ y tiene escala.`
-          )
-        : console.log(
-            `ID del vuelo: ${vuelosFiltrados[i].id}. El vuelo con origen ${vuelosFiltrados[i].from} y destino ${vuelosFiltrados[i].to} tiene un coste de ${vuelosFiltrados[i].cost}€ y no tiene escala.`
-          );
-    }
-  }
-  seleccionUsuario();
-};
-
-let idSeleccionada;
 const seleccionUsuario = () => {
   idSeleccionada = prompt(
     "¿Qué número de vuelo quieres comprar? Indica el número de ID correspondiente al vuelo. Pulsa cancelar para salir "
   );
   if (!idSeleccionada) {
     return alert(`Gracias por consultar nuestras aerolineas.`);
-  } else if (idDeVuelosFiltrados.includes(Number(idSeleccionada))) {
+  }
+  if (idDeVuelosFiltrados.includes(Number(idSeleccionada))) {
     alert(
       `Gracias por la compra del vuelo ID: ${idSeleccionada}, vuelve pronto.`
     );
@@ -205,7 +185,37 @@ const seleccionUsuario = () => {
   }
 };
 
-main = () => {
+const opcionesUsuario = () => {
+  const precio = prompt(
+    "¿Cuál es el precio máximo que quieres pagar por tu viaje? Escribe un número."
+  );
+
+  if (precio < 90) {
+    alert(`Debes introducir un precio minimo valido.`);
+    return opcionesUsuario();
+  }
+  if (precio === null && isNaN(precio)) {
+    alert(`Gracias por visitar nuestras aerolineas.`);
+    return opcionesAdmin();
+  }
+  const precioNum = parseFloat(precio);
+  const vuelosFiltrados = vuelos.filter((vuelo) => vuelo.cost <= precioNum);
+
+  for (let i = 0; i < vuelosFiltrados.length; i++) {
+    idDeVuelosFiltrados.push(vuelosFiltrados[i].id);
+    vuelosFiltrados[i].scale
+      ? console.log(
+          `ID del vuelo: ${vuelosFiltrados[i].id}. El vuelo con origen ${vuelosFiltrados[i].from} y destino ${vuelosFiltrados[i].to} tiene un coste de ${vuelosFiltrados[i].cost}€ y tiene escala.`
+        )
+      : console.log(
+          `ID del vuelo: ${vuelosFiltrados[i].id}. El vuelo con origen ${vuelosFiltrados[i].from} y destino ${vuelosFiltrados[i].to} tiene un coste de ${vuelosFiltrados[i].cost}€ y no tiene escala.`
+        );
+  }
+
+  seleccionUsuario();
+};
+
+const main = () => {
   bienvenida();
   infoVuelos(vuelos);
   calcularCosteMedio();
