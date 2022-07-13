@@ -54,7 +54,6 @@ function calculadora() {
     } else {
       multiplicacionDec = multiplicacion;
     }
-    // push de los resultados en la array ponerle `` + ${}
     resultados.push(sumaDec, restaDec, divisionDec, multiplicacionDec);
     console.log(
       `
@@ -63,12 +62,10 @@ function calculadora() {
     La division es:  ${resultados[2]},
     La multiplicacion es: ${resultados[3]} .`
     );
-    // mensaje de alerta si se introducen otros valores que no sean numeros
   } else {
     alert(
       "Porfavor, introduzca otro valor numerico o pulse aceptar en el segundo recuadro si desea solo el cálculo de la raiz."
     );
   }
 }
-// llamamos a la funcion
 calculadora();
