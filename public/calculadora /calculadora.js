@@ -69,3 +69,5 @@ function calculadora() {
   }
 }
 calculadora();
+
+export default calculadora;
